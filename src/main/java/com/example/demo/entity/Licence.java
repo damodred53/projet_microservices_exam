@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,9 +28,9 @@ public class Licence {
     private String movieId;
 
     @Column(nullable = false)
-    private LocalDate datePurchase;
+    private LocalDateTime datePurchase;
 
     @Column(nullable = false)
-    private int price;
+    private BigDecimal price;
 
 }

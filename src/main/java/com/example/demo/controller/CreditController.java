@@ -4,21 +4,15 @@ import com.example.demo.entity.Credit;
 import com.example.demo.repository.CreditRepository;
 import com.example.demo.request.CreditRequest;
 
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/credits")
 public class CreditController {
 
   private final CreditRepository repo;
-  private static final Logger logger = LoggerFactory.getLogger(CreditController.class);
 
   public CreditController(CreditRepository repo) {
     this.repo = repo;
