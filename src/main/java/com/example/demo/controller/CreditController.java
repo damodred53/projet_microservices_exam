@@ -6,7 +6,7 @@ import com.example.demo.repository.CreditRepository;
 import com.example.demo.request.CreditRequest;
 
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +40,11 @@ public class CreditController {
 
     try {
       amqpTemplate.convertAndSend("credit-exchange", "credit.created", msg);
-      System.out.println("✅ Message envoyé à RabbitMQ: " + msg);
+
     } catch (Exception e) {
-      System.err.println("❌ Erreur lors de l'envoi RabbitMQ: " + e.getMessage());
-      e.printStackTrace(); // ✅ voir la vraie erreur dans la console
-      return ResponseEntity.status(500).body(saved); // pour ne pas bloquer
+
+      e.printStackTrace();
+      return ResponseEntity.status(500).body(saved);
     }
 
     return ResponseEntity.ok(saved);
