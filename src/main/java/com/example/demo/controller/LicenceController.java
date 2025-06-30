@@ -32,13 +32,4 @@ public class LicenceController {
         return ResponseEntity.ok(repo.save(licence));
     }
 
-    @GetMapping("/{userUuid}")
-    public ResponseEntity<List<Licence>> getAllLicencesByUser(@PathVariable String userUuid) {
-        Optional<List<Licence>> optionalLicences = repo.findAllByUserUuid(userUuid);
-        if (optionalLicences.isEmpty() || optionalLicences.get().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(optionalLicences.get());
-    }
-
 }

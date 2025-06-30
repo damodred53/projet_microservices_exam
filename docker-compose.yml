@@ -8,8 +8,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mymicroservicesdb
       SPRING_DATASOURCE_USERNAME: fguyard
       SPRING_DATASOURCE_PASSWORD: 123456
+      SPRING_RABBITMQ_HOST: rabbitmq # Ajouter la configuration de RabbitMQ ici
+      SPRING_RABBITMQ_PORT: 5672 # Ajouter le port de RabbitMQ ici
+      SPRING_RABBITMQ_USERNAME: user # Utilise un utilisateur RabbitMQ approprié
+      SPRING_RABBITMQ_PASSWORD: password # Mot de passe RabbitMQ approprié
     depends_on:
       - db
+      - rabbitmq # Assure-toi que l'application attend que RabbitMQ soit prêt
     networks:
       - springnet
 
@@ -23,6 +28,17 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - springnet
+
+  rabbitmq:
+    image: rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - springnet
 
